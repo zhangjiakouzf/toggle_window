@@ -1,0 +1,8 @@
+{
+  "name": "Toggle Window",
+  "description": "Toggle windown by parameter(s).",
+  "uuid": "toggle-window@togglewindow.com",
+  "shell-version": [
+    "42"
+  ]
+}
