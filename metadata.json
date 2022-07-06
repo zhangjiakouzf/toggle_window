@@ -1,7 +1,9 @@
 {
+  "uuid": "toggle-window@togglewindow.com",
   "name": "Toggle Window",
   "description": "Toggle windown by parameter(s).",
-  "uuid": "toggle-window@togglewindow.com",
+  "version":1,
+  "url":"https://github.com/zhangjiakouzf/toggle_window",
   "shell-version": [
     "42"
   ]
