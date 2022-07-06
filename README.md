@@ -15,7 +15,7 @@ So we have to move the actions into a gnome extension known as an "agent"(or som
 
     Then we can invokes the "**cn.extensions.toggleWindow.ToggleWindowByWMClassName**" method through dbus to toggle the window.  
     If the window is activated(on the front), it will be minimized, or the window will be activated.
-    So you can map a lot of keyboard shortcuts to navigate between your favorite X-programs without using mouse.
+    So you can map a lot of keyboard shortcuts to navigate between your favorite X-programs without using mouse.  
     For example:
 ```sh
         $gdbus call --session \
