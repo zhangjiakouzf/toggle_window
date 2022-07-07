@@ -1,8 +1,8 @@
 {
   "uuid": "toggle-window@togglewindow.com",
   "name": "Toggle Window",
-  "description": "Toggle windown by parameter(s).",
-  "version":1,
+  "description": "For security reasons, since Gnome 41, cann't invoke '**org.gnome.Shell.Eval**' to control the behavior of window, we expose a D-Bus interface to activate/minimized a window by WMclass name. For example: $gdbus call --session --dest org.gnome.Shell --object-path /cn/extensions/toggleWindow --method cn.extensions.toggleWindow.ToggleWindowByWMClassName '$WMClassName'. More detail information please visit the github repository.",
+  "version":3,
   "url":"https://github.com/zhangjiakouzf/toggle_window",
   "shell-version": [
     "42"
