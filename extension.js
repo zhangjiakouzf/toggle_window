@@ -73,7 +73,3 @@ export default class ToggleWindow {
 		return false;
         }
 }
-
-function init() {
-	return new ToggleWindow();
-}
