@@ -17,6 +17,8 @@
  */
 
 /* exported init */
+import Meta from 'gi://Meta';
+
 const { Gio } = imports.gi;
 
 const ToggleWindowInterface = `
@@ -29,7 +31,7 @@ const ToggleWindowInterface = `
   </interface>
 </node>
 `;
-class ToggleWindow {
+export default class ToggleWindow {
 	#dbus;
 
 	constructor() {
@@ -53,22 +55,26 @@ class ToggleWindow {
 		this.#dbus = undefined;
 	}
 	ToggleWindowByWMClassName(wmClassName) {
-		for (const actor of global.get_window_actors()) {
-			const window = actor.get_meta_window();
-			if (window.get_wm_class().includes(wmClassName)) {
-				if( window.has_focus() ){
-					global.log(wmClassName+"'s minimized")
-					window.minimize()
-				}else{
-					global.log(wmClassName+"'s activated")
-					window.activate(global.get_current_time());
-				}
-				return true;
-			}
-		}
-
+		console.log("enter ToggleWindowByWMClassName:"+wmClassName)
+                let windows = global.get_window_actors().map(actor => actor.get_meta_window());
+                windows.forEach(
+                        (w)=>{
+                                let WMClass=w.get_wm_class();
+                                log("toggle",WMClass);
+                                if(WMClass===wmClassName){
+                                        if( w.has_focus() ){
+                                                console.log(wmClassName+"'s minimized")
+                                                w.minimize()
+                                        }else{
+                                                console.log(wmClassName+"'s activated")
+                                                w.activate(global.get_current_time());
+                                        }
+				        return true;
+                                }
+                        }
+                )
 		return false;
-	}
+        }
 }
 
 function init() {
