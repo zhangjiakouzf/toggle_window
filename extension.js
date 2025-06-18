@@ -55,18 +55,15 @@ export default class ToggleWindow {
 		this.#dbus = undefined;
 	}
 	ToggleWindowByWMClassName(wmClassName) {
-		console.log("enter ToggleWindowByWMClassName:"+wmClassName)
+		console.log("toggle-window:","enter ToggleWindowByWMClassName:"+wmClassName)
                 let windows = global.get_window_actors().map(actor => actor.get_meta_window());
                 windows.forEach(
                         (w)=>{
                                 let WMClass=w.get_wm_class();
-                                log("toggle",WMClass);
                                 if(WMClass===wmClassName){
                                         if( w.has_focus() ){
-                                                console.log(wmClassName+"'s minimized")
                                                 w.minimize()
                                         }else{
-                                                console.log(wmClassName+"'s activated")
                                                 w.activate(global.get_current_time());
                                         }
 				        return true;
