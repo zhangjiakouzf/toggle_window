@@ -56,22 +56,24 @@ export default class ToggleWindow {
 	}
 	ToggleWindowByWMClassName(wmClassName) {
 		console.log("toggle-window:","enter ToggleWindowByWMClassName:"+wmClassName)
-                let found = false
-                let windows = global.get_window_actors().map(actor => actor.get_meta_window());
-                windows.forEach(
-                        (w)=>{
-                                let WMClass=w.get_wm_class();
-		                console.log("toggle-window:","w.get_wm_class:"+WMClass)
-                                if(WMClass===wmClassName){
-                                        if( w.has_focus() ){
-                                                w.minimize()
-                                        }else{
-                                                w.activate(global.get_current_time());
-                                        }
-				        found = true;
-                                }
+                let windows = global.get_window_actors()
+                        .map(actor => actor.get_meta_window())
+                        .sort((a,b)=>(a.user_time-b.user_time));
+                let focused_window = windows.filter(window => window.has_focus() && window.get_wm_class() === wmClassName);
+                let unfocused_window = windows.filter(window => !window.has_focus() && window.get_wm_class() === wmClassName);
+
+                focused_window.forEach(
+                        window => {
+                                console.log("toggle-window:","minimize:"+window.get_wm_class()+" id:"+window.get_stable_sequence())
+                                window.minimize();
+
                         }
                 )
-		return found;
+                for (let window of unfocused_window) {
+                        console.log("toggle-window:","activate:"+window.get_wm_class()+" id:"+window.get_stable_sequence())
+                        window.activate(global.get_current_time());
+                        break; // 仅处理第一个窗口后退出
+                }
+                return focused_window.length > 0 || unfocused_window.length > 0;
         }
 }
